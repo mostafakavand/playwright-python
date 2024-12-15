@@ -41,6 +41,7 @@ from playwright._impl._api_structures import (
     PdfMargins,
     Position,
     ViewportSize,
+    WindowState,
 )
 from playwright._impl._artifact import Artifact
 from playwright._impl._clock import Clock
@@ -629,6 +630,9 @@ class Page(ChannelOwner):
     async def set_viewport_size(self, viewportSize: ViewportSize) -> None:
         self._viewport_size = viewportSize
         await self._channel.send("setViewportSize", locals_to_params(locals()))
+    
+    async def set_window_state(self, state: WindowState) -> None:
+        await self._channel.send("setWindowState", {"state": state})
 
     @property
     def viewport_size(self) -> Optional[ViewportSize]:
