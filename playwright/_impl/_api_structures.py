@@ -14,6 +14,7 @@
 
 from pathlib import Path
 from typing import Any, Dict, List, Literal, Optional, Sequence, TypedDict, Union
+from enum import Enum
 
 # These are the structures that we like keeping in a JSON form for their potential
 # reuse between SDKs / services. They are public and are a part of the
@@ -75,6 +76,13 @@ class LocalStorageEntry(TypedDict):
 class OriginState(TypedDict):
     origin: str
     localStorage: List[LocalStorageEntry]
+
+class WindowState(str, Enum):
+    MAXIMIZED = "maximized"
+    MINIMIZED = "minimized"
+    NORMAL = "normal"
+    RESTORED = "restored"
+
 
 
 class PdfMargins(TypedDict, total=False):
